@@ -438,7 +438,7 @@ def render_markdown(bundle: dict[str, object]) -> str:
     roots = bundle["roots"]
     stats = bundle["discovery_stats"]
     lines = [
-        "# Weekly memory candidate bundle",
+        "# Report memory candidate bundle",
         "",
         f"- Generated at: {bundle['generated_at']}",
         f"- Discovery since: {bundle['discovery_since']}",
