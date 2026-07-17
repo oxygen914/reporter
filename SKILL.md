@@ -7,15 +7,38 @@ description: Generate structured Chinese daily, weekly, or monthly work reports 
 
 Generate evidence-based Chinese daily, weekly, and monthly work reports from recent AI memory files. Invoke this Skill explicitly with `$reporter` when needed.
 
+## Guide a bare invocation
+
+When the user invokes only `$reporter` or `/reporter` without a report type, detail level, or automation intent, respond with a short Chinese welcome and usage guide before asking them to choose. Use this structure:
+
+```text
+您好，我可以帮您生成日报、周报或月报，也可以创建 Codex 周期自动化任务。
+
+您可以直接说：
+- “周报，详细”：立即生成近七天详细周报。
+- “生成今天的标准日报”：立即生成当天工作日报。
+- “使用工作报告生成器创建自动化：每周五 18:00 生成本周详细周报，时区 Asia/Shanghai。”
+
+可选项：
+- 报告类型：日报 / 周报 / 月报
+- 详细程度：精简 / 标准 / 详细
+- 自动化周期：每天 / 工作日 / 每周 / 每月
+- 统计范围：当前周期 / 上一完整周期
+
+请告诉我：现在生成报告，还是配置周期自动化？
+```
+
+Keep the guide concise and copy-ready. Do not collect memory or create an automation until the user replies. Do not repeat this guide when the same request already supplies enough information to proceed.
+
 ## Choose the run mode
 
 - Treat requests such as “生成今天的日报”“生成本周周报” or “生成本月月报” as manual runs. Do not create an automation.
 - Treat requests such as “每天自动生成日报” or “每月自动生成月报” as automation setup.
-- If the request is genuinely ambiguous, ask whether to generate now or configure a recurring schedule.
+- If the request is a bare invocation, use the welcome guide above. For other genuinely ambiguous requests, ask whether to generate now or configure a recurring schedule and include one relevant copy-ready example.
 
 ## Collect preferences before execution
 
-For an interactive manual run, collect any missing report type and detail level before reading memory or drafting. Ask one concise combined question when both are missing; offer report types `日报`、`周报`、`月报` and detail levels `精简`、`标准`、`详细`. If only one preference is missing, ask only for that preference. Do not silently choose while the user is available to answer.
+For an interactive manual run, collect any missing report type and detail level before reading memory or drafting. Ask one concise combined question when both are missing; offer report types `日报`、`周报`、`月报` and detail levels `精简`、`标准`、`详细`. If only one preference is missing, ask only for that preference. When the user replies with a complete choice such as `周报，详细`, begin collection and drafting immediately without asking them to reconfirm. Do not silently choose while the user is available to answer.
 
 Use these remaining defaults unless the user specifies otherwise:
 
@@ -81,6 +104,8 @@ Only edit a report file when the user asks. Preserve earlier daily, weekly, or m
 ## Configure Codex automation
 
 When the user requests scheduling:
+
+If the user only asks what automation is supported, explain the available fields and provide this copy-ready example before collecting values: `使用工作报告生成器创建自动化：每周五 18:00 生成本周详细周报，时区 Asia/Shanghai。`
 
 1. Ask whether to create a new automation or update an existing one when the request does not make that clear.
 2. Ask which report to generate: `日报`、`周报`、`月报`. Keep report type separate from automation recurrence; for example, a user may generate a weekly report every Monday.
