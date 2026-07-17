@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" fill="none">
+  <defs>
+    <linearGradient id="apple-gradient" gradientUnits="userSpaceOnUse" x1="56" y1="160" x2="1158" y2="160">
+      <stop offset="0%" stop-color="#2997ff"/><stop offset="34%" stop-color="#5e5ce6"/><stop offset="68%" stop-color="#af52de"/><stop offset="100%" stop-color="#ff375f"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#apple-gradient)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path id="r" d="M72 226 L72 112 L72 150 C93 119 128 111 157 130"/>
+    <path id="e" d="M292 198 C270 232 207 236 184 192 C161 148 197 112 244 120 C280 126 297 151 288 171 C258 179 218 179 184 171"/>
+    <path id="p" d="M342 286 L342 120 L342 151 C368 117 421 113 447 151 C470 185 447 228 405 232 C376 235 353 218 342 198"/>
+    <path id="o" d="M527 176 C527 129 563 114 600 120 C639 126 656 162 644 199 C632 236 580 244 546 216 C530 202 524 188 527 176 Z"/>
+    <path id="r-2" d="M696 226 L696 120 L696 151 C716 121 748 112 777 130"/>
+    <path id="t-stem" d="M836 76 L836 218 C836 230 842 236 854 236"/>
+    <path id="t-cross" d="M794 122 L878 122"/>
+    <path id="e-2" d="M1010 198 C988 232 925 236 902 192 C879 148 915 112 962 120 C998 126 1015 151 1006 171 C976 179 936 179 902 171"/>
+    <path id="r-3" d="M1060 226 L1060 120 L1060 151 C1080 121 1115 112 1144 130"/>
+  </g>
+</svg>
