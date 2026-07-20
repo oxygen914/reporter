@@ -148,7 +148,7 @@ frames[0].save(
     save_all=True,
     append_images=frames[1:],
     duration=round(1000 / FPS),
-    loop=0,
+    loop=1,
     lossless=False,
     quality=90,
     method=6,
