@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the reporter SVG-path choreography as a transparent animated WebP preview."""
+"""Render a single-play WebP preview that holds the final reporter lockup."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ WIDTH, HEIGHT = 1200, 320
 SCALE = 2
 FRAME_COUNT = 72
 FPS = 24
+LOOP_COUNT = 1
 STROKE_WIDTH = 30
 COLORS = [
     (0.00, (41, 151, 255)),
@@ -132,15 +133,12 @@ frames: list[Image.Image] = []
 
 for frame_index in range(FRAME_COUNT):
     lottie_frame = frame_index / (FRAME_COUNT - 1) * 149
-    fade = 1.0
-    if frame_index >= FRAME_COUNT - 8:
-        fade = (FRAME_COUNT - 1 - frame_index) / 7
     canvas = Image.new("RGBA", (WIDTH * SCALE, HEIGHT * SCALE), (0, 0, 0, 0))
     draw = ImageDraw.Draw(canvas, "RGBA")
     for points, letter in zip(svg_paths, letter_positions):
         start = round(5 + letter * 11)
         raw = min(1.0, max(0.0, (lottie_frame - start) / 34))
-        draw_path(draw, visible_points(points, cubic_bezier_y(raw)), round(255 * fade))
+        draw_path(draw, visible_points(points, cubic_bezier_y(raw)), 255)
     frames.append(canvas.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS))
 
 frames[0].save(
@@ -148,7 +146,7 @@ frames[0].save(
     save_all=True,
     append_images=frames[1:],
     duration=round(1000 / FPS),
-    loop=1,
+    loop=LOOP_COUNT,
     lossless=False,
     quality=90,
     method=6,
